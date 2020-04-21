@@ -26,32 +26,40 @@ const basicMenu = () => {
   {url: '/TV', text: "TV"},
   {url: '/Music', text: "Music"},
   {url: '/Support', text: "Support"},
-  {url: '/Search', text: "Search"},
-  {url: '/Store', text: "Store"},
-
-
+  {url: '/Search', text: (<CropDiv32 <img src='/search.svg' height="64px" alt='Search' />)},
+  {url: '/Store', text: <img src='/shop.svg' height="32px" alt="Shop" />},
   ]
 }
 
 
 function App() {
+const {subState, setSubState} = useState('')
+const {subContent, setSubContent} = useState([])
+
+function changeState(txt) {
+  console.log("Changing State")
+  setSubState(text)
+}
+
+useEffect(() => {
+  console.log('App is firing off the useEffect hook')
+  setSubContent('Setting Sub Content' + subState)
+},[subState])
+
+const navMenu = exampleMenu(changeState);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <WrapperDiv>
+      <div className="App">
+        <header className="App-header">
+          <NAV>
+            {navMenu}
+          </NAV>
+        </header>
+        <SubNav>
+          {subContent}
+        </SubNav>
+      </div>
+    </WrapperDiv>
   );
 }
 
